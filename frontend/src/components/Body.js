@@ -17,6 +17,7 @@ const Body = () => {
   const [scenarioDetails, setScenarioDetails] = useState(null);
 
   const baseUrl = "http://localhost:5000"; // For development
+  // const baseUrl = "http://<public ip of ec2>:5000"; //For deployment
 
   useEffect(() => {
     // Fetch scenario data when selectedScenario changes
