@@ -5,7 +5,7 @@ This is the main repository of the TRAVOS app which includes both the frontend a
 ### 🧱 Built With
 
 1. React
-2. Python 3.7
+2. Python 3
 3. Flask
 4. npm
 5. MongoDB
