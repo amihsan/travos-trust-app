@@ -1,0 +1,13 @@
+.vscode/
+.idea/
+/backend/logs/
+/backend/.env.prod
+/backend/.env
+/backend/app.log
+/backend/venv
+/frontend/node_modules
+# __pycache__/
+
+/backend/**/__pycache__/
+
+

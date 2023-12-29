@@ -1,0 +1,22 @@
+body {
+  margin: 0; /* Remove default body margin */
+}
+
+.app-container {
+  height: 100vh; /* Set the app container to take the full height of the viewport */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Define the heights of the header, body, and footer */
+Header {
+  flex: 15%;
+}
+
+Body {
+  flex: 70%;
+}
+
+Footer {
+  flex: 15%;
+}
