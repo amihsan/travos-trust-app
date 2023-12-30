@@ -1,0 +1,60 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 14
+
+    - name: Install Dependencies and Build React App
+      run: |
+        cd frontend
+        npm install
+        npm run build
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+
+    - name: Install Python Dependencies and Test Flask App
+      run: |
+        cd backend
+        pip install -r requirements.txt
+        pytest
+
+    - name: Deploy
+      run: |
+        # Assuming your EC2 instance is accessible via SSH
+        ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ec2-user@your-ec2-instance-ip << 'EOF'
+          # Update the React app
+          cd /path/to/your/react/app
+          git pull origin main
+          npm install
+          npm run build
+    
+          # Update the Flask API
+          cd /path/to/your/flask/app
+          git pull origin main
+          pip install -r requirements.txt
+    
+          # Restart Gunicorn (assuming Gunicorn is used to serve Flask)
+          sudo systemctl restart gunicorn
+    
+          # Restart Nginx
+          sudo systemctl restart nginx
+        EOF
+    
+
