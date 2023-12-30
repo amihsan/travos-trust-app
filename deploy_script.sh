@@ -1,39 +1,33 @@
 #!/bin/bash
-
-# Run subsequent commands with elevated privileges
 sudo su
-
-# Update the system
 sudo yum update
 
-# Change to the project directory
-cd /home/ec2-user/travos-trust-app/
+# Project Root
+cd travos-trust-app/
 
-# Pull the latest changes from the GitHub repository
+# Log
 git pull https://github.com/amihsan/travos-trust-app.git
+echo "Updating changes from Github Repo"
 
-# Update the React app
-cd frontend
+# Log
+echo "Updating the React app..."
+cd /home/ec2-user/travos-trust-app/frontend
 npm install
 npm run build
 
-# Update the Flask API
-cd ../backend
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
 
 # Restart Frontend Service
 sudo systemctl restart frontend
-
-# Restart Backend Service
-sudo systemctl restart backend
+echo "Frontend service restarted successfully."
 
 # Restart Nginx
 sudo systemctl restart nginx
+echo "Nginx restarted successfully."
 
 # Restart MongoDB Service
 sudo systemctl restart mongod
+echo "MongoDB service restarted successfully."
 
 # Restart Gunicorn (Flask)
 sudo systemctl restart gunicorn
+echo "Gunicorn restarted successfully."
