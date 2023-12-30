@@ -10,7 +10,7 @@ sudo yum update
 cd /home/ec2-user/travos-trust-app/
 
 # Pull the latest changes from the GitHub repository
-git pull https://github.com/amihsan/travos-trust-app.git
+sudo git pull https://github.com/amihsan/travos-trust-app.git
 
 # Check the exit status of git pull
 if [ $? -eq 0 ]; then
@@ -21,6 +21,8 @@ else
     exit 1
 fi
 
+# Change ownership of the project directory to the user
+sudo chown -R ec2-user:ec2-user /home/ec2-user/travos-trust-app/
 
 # Update the React app
 cd frontend
@@ -29,9 +31,11 @@ npm run build
 
 # Update the Flask API
 cd ../backend
-python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
+
+# Deactivate the virtual environment
+deactivate
 
 # Restart Frontend Service
 sudo systemctl restart frontend
