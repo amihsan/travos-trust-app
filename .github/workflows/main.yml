@@ -19,10 +19,13 @@ jobs:
       - name: Debug SSH Connection
         run: |
           # Update known_hosts
+          mkdir -p ~/.ssh
+          echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/private_key.pem
+          chmod 600 ~/.ssh/private_key.pem
           ssh-keyscan -H ${{ secrets.HOST_DNS }} >> ~/.ssh/known_hosts
 
           # Debugging output: Print known_hosts file after updating
           cat ~/.ssh/known_hosts
 
           # Debugging output: Attempt an SSH connection
-          ssh -i <(echo "${{ secrets.EC2_SSH_KEY }}") -o StrictHostKeyChecking=no ${{ secrets.REMOTE_USER }}@${{ secrets.HOST_DNS }} 'bash /home/ec2-user/travos-trust-app/deploy_script.sh'
+          ssh -i ~/.ssh/private_key.pem -o StrictHostKeyChecking=no ${{ secrets.REMOTE_USER }}@${{ secrets.HOST_DNS }} 'bash /home/ec2-user/travos-trust-app/deploy_script.sh'
