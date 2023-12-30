@@ -30,4 +30,4 @@ jobs:
 
       - name: Deploy
         run: |
-          ssh -i ${{ secrets.EC2_SSH_KEY }} ${{ secrets.REMOTE_USER }}@${{ secrets.HOST_DNS }} 'bash -s' < deploy_script.sh
+          ssh -i ${{ secrets.EC2_SSH_KEY }} ${{ secrets.USERNAME }}@${{ secrets.HOST_DNS }} 'bash -s' < deploy_script.sh
