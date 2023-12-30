@@ -13,14 +13,6 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Install SSH Client
-        run: sudo apt-get install -y openssh-client
-
       - name: Run Deployment Script on EC2
         run: |
-          mkdir -p ~/.ssh
-          echo -e "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/private_key.pem
-          chmod 600 ~/.ssh/private_key.pem
-
-          scp -i ~/.ssh/private_key.pem -o StrictHostKeyChecking=no ./path/to/deploy_script.sh ${{ secrets.REMOTE_USER }}@${{ secrets.HOST_DNS }}:/home/ec2-user/travos-trust-app/deploy_script.sh
-          ssh -i ~/.ssh/private_key.pem -o StrictHostKeyChecking=no ${{ secrets.REMOTE_USER }}@${{ secrets.HOST_DNS }} 'bash /home/ec2-user/travos-trust-app/deploy_script.sh'
+          ssh -i ${{ secrets.EC2_SSH_KEY }} ${{ secrets.REMOTE_USER }}@${{ secrets.HOST_DNS }} 'bash /home/ec2-user/travos-trust-app/deploy_script.sh'
