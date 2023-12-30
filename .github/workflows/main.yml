@@ -53,8 +53,9 @@ jobs:
         ssh-keyscan -H ${{ secrets.HOST_DNS }} >> ~/.ssh/known_hosts
 
         # Specify the private key and use it for scp and ssh-keyscan
-        scp -i ~/.ssh/${{ secrets.EC2_SSH_KEY }} -r frontend/build ${{ secrets.REMOTE_USER }}@${{ secrets.HOST_DNS }}:${{ secrets.TARGET_DIR }}/frontend
-        ssh-keyscan -i ~/.ssh/${{ secrets.EC2_SSH_KEY }} -H ${{ secrets.HOST_DNS }} >> ~/.ssh/known_hosts
+        echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/react_flask.pem
+        chmod 600 ~/.ssh/react_flask.pem
+        scp -i ~/.ssh/react_flask.pem -r frontend/build ${{ secrets.REMOTE_USER }}@${{ secrets.HOST_DNS }}:${{ secrets.TARGET_DIR }}/frontend
 
         # Restart Gunicorn (Flask)
         sudo systemctl restart gunicorn
