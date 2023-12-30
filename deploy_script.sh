@@ -26,6 +26,8 @@ fi
 cd frontend
 npm install
 npm run build
+npm install -g serve
+serve -s build
 
 # Update the Flask API
 cd ../backend
