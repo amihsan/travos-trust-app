@@ -13,6 +13,9 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
+      - name: Create SSH Directory
+        run: mkdir -p ~/.ssh
+
       - name: Debug SSH Connection
         run: |
           # Update known_hosts
