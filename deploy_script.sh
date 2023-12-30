@@ -1,15 +1,15 @@
 #!/bin/bash
 
 # Update the React app
-cd /home/ec2-user/travos-trust-app/frontend
-npm install
-npm run build
+sudo cd /home/ec2-user/travos-trust-app/frontend
+sudo npm install
+sudo npm run build
 
 # Update the Flask API
-cd /home/ec2-user/travos-trust-app/backend
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
+sudo cd /home/ec2-user/travos-trust-app/backend
+sudo python3 -m venv venv
+sudo source venv/bin/activate
+sudo pip install -r requirements.txt
 
 # Restart Gunicorn (Flask)
 sudo systemctl restart gunicorn
