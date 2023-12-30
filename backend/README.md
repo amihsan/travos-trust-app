@@ -13,37 +13,45 @@ This is the Backend of the TRAVOS . So all the application logic is here.
 1. Install MongoDB
 
 2. Setup virtual env in backend root:
-    ```shell
-    python -m venv venv
-    ```
+   ```shell
+   python -m venv venv
+   ```
 3. To activate the virtual environment:
 
-      - On Windows:
-    
-      ```bash
-      .\venv\Scripts\activate
-      ```
-    
-      - On macOS/Linux:
-    
-      ```bash
-      source venv/bin/activate
-      ```
-    
-    To install the Python dependencies specified in your `requirements.txt` file, use the following command:
-    
-    ```bash
-    pip install -r requirements.txt
-    ```
+   - On Windows:
 
+   ```bash
+   .\venv\Scripts\activate
+   ```
+
+   - On macOS/Linux:
+
+   ```bash
+   source venv/bin/activate
+   ```
+
+   To install the Python dependencies specified in your `requirements.txt` file, use the following command:
+
+   ```bash
+   pip install -r requirements.txt
+   ```
 
 ## 👟 Usage
 
 ### 🏠 Local Usage
-   
+
 1. Run local MongoDB
 
-2.  Run backend: after activate venv
-    ```bash
-    python run.py
-    ```
+2. Run backend: after activate venv:
+
+For storing scenario details in MongoDB go to generate_scenario
+
+```bash
+python insert_scenario_data.py
+```
+
+and then in backend root:
+
+```bash
+python run.py
+```
