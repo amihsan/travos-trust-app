@@ -13,8 +13,8 @@ ls
 # Update the React app
 cd frontend/
 ls
-npm install
-npm run build
+sudo npm install
+sudo npm run build
 
 cd ..
 
