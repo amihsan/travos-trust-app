@@ -16,8 +16,8 @@ const Body = () => {
   const [evaluationResults, setEvaluationResults] = useState(null);
   const [scenarioDetails, setScenarioDetails] = useState(null);
 
-  const baseUrl = "http://localhost:5000"; // For development
-  // const baseUrl = "http://<public ip of aws ec2>:5000"; //For deployment
+  // const baseUrl = "http://localhost:5000"; // For development
+  const baseUrl = "http://51.21.101.168:5000"; //For deployment
 
   useEffect(() => {
     // Fetch scenario data when selectedScenario changes
