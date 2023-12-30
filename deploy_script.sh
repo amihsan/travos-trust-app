@@ -24,8 +24,8 @@ systemctl restart frontend
 # Restart Backend Service
 systemctl restart backend
 
-# Restart MongoDB Service
-systemctl restart mongod
-
 # Restart Nginx
 systemctl restart nginx
+
+# Restart MongoDB Service
+systemctl restart mongod

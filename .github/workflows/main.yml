@@ -1,4 +1,4 @@
-name: CI/CD
+name: Deploy to EC2
 
 on:
   push:
@@ -6,73 +6,20 @@ on:
       - main
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
+
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v2
+      - name: Checkout Repository
+        uses: actions/checkout@v2
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: 18
+      - name: Install SSH Client
+        run: sudo apt-get install -y openssh-client
 
-    - name: Install Frontend Dependencies
-      run: |
-        cd frontend
-        npm install
+      - name: Run Deployment Script on EC2
+        run: |
+          mkdir -p ~/.ssh
+          echo -e "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/private_key.pem
+          chmod 600 ~/.ssh/private_key.pem
 
-    - name: Build Frontend
-      run: |
-        cd frontend
-        npm run build
-
-    - name: Set up Python
-      uses: actions/setup-python@v3
-      with:
-        python-version: 3.9
-
-    - name: Install Python Dependencies
-      run: |
-        cd backend
-        pip install -r requirements.txt
-
-    - name: Deploy to EC2
-      run: |
-        # Create .ssh directory and an empty known_hosts file
-        mkdir -p ~/.ssh
-        touch ~/.ssh/known_hosts
-    
-        # Display the contents of the .ssh directory for debugging
-        ls -la ~/.ssh
-    
-        # Display the contents of the known_hosts file for debugging
-        cat ~/.ssh/known_hosts
-    
-        # Add the host key to the known_hosts file
-        ssh-keyscan -H ${{ secrets.HOST_DNS }} >> ~/.ssh/known_hosts
-    
-        # Write the private key content directly to the file
-        echo -e "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/react_flask.pem
-        chmod 600 ~/.ssh/react_flask.pem
-    
-        # Debugging output: Print known_hosts file after updating
-        cat ~/.ssh/known_hosts
-    
-        # Debugging output: Print private key file content
-        cat ~/.ssh/react_flask.pem
-    
-        # Debugging output: Attempt an SSH connection
-        ssh -i ~/.ssh/react_flask.pem -v ${{ secrets.REMOTE_USER }}@${{ secrets.HOST_DNS }} echo "SSH Connected"
-
-        # Restart Gunicorn (Flask)
-        sudo systemctl restart gunicorn
-
-        # Restart Frontend Service
-        sudo systemctl restart frontend
-
-        # Restart Backend Service
-        sudo systemctl restart backend
-
-        # Restart Nginx
-        sudo systemctl restart nginx
+          ssh -i ~/.ssh/private_key.pem -o StrictHostKeyChecking=no ${{ secrets.REMOTE_USER }}@${{ secrets.HOST_DNS }} 'bash -s' < ./path/to/deploy_script.sh
