@@ -13,6 +13,23 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
+      - name: Debug SSH Connection
+        run: |
+          echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/private_key.pem
+          chmod 600 ~/.ssh/private_key.pem
+
+          # Display the contents of the private key for debugging
+          cat ~/.ssh/private_key.pem
+
+          # Update known_hosts
+          ssh-keyscan -H ${{ secrets.HOST_DNS }} >> ~/.ssh/known_hosts
+
+          # Debugging output: Print known_hosts file after updating
+          cat ~/.ssh/known_hosts
+
+          # Debugging output: Attempt an SSH connection
+          ssh -i ~/.ssh/private_key.pem -o StrictHostKeyChecking=no ${{ secrets.REMOTE_USER }}@${{ secrets.HOST_DNS }} echo "SSH Connected"
+
       - name: Run Deployment Script on EC2
         run: |
-          ssh -i "${{ secrets.EC2_SSH_KEY }}" ec2-user@${{ secrets.HOST_DNS }} 'bash /home/ec2-user/travos-trust-app/deploy_script.sh'
+          ssh -i ~/.ssh/private_key.pem -o StrictHostKeyChecking=no ${{ secrets.REMOTE_USER }}@${{ secrets.HOST_DNS }} 'bash /home/ec2-user/travos-trust-app/deploy_script.sh'
