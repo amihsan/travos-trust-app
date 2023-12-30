@@ -2,6 +2,9 @@
 
 This is the main repository of the TRAVOS app which includes both the frontend and backend logic of the application.
 
+## View Demo (Deployed on AWS EC2)
+http://ec2-51-21-101-168.eu-north-1.compute.amazonaws.com
+
 ### 🧱 Built With
 
 1. React
