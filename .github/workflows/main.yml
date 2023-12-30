@@ -36,25 +36,34 @@ jobs:
       run: |
         cd backend
         pip install -r requirements.txt
-    
+
     - name: Deploy to EC2
       run: |
+        # Create .ssh directory and an empty known_hosts file
         mkdir -p ~/.ssh
         touch ~/.ssh/known_hosts
-        ls -la ~/.ssh  # Display the contents of the .ssh directory for debugging
-        cat ~/.ssh/known_hosts  # Display the contents of the known_hosts file for debugging
+
+        # Display the contents of the .ssh directory for debugging
+        ls -la ~/.ssh
+
+        # Display the contents of the known_hosts file for debugging
+        cat ~/.ssh/known_hosts
+
+        # Add the host key to the known_hosts file
         ssh-keyscan -H ${{ secrets.HOST_DNS }} >> ~/.ssh/known_hosts
-        scp -r frontend/build ${{ secrets.REMOTE_USER }}@${{ secrets.HOST_DNS }}:${{ secrets.TARGET_DIR }}/frontend
-        scp -r backend ${{ secrets.REMOTE_USER }}@${{ secrets.HOST_DNS }}:${{ secrets.TARGET_DIR }}/backend
-    
+
+        # Specify the private key and use it for scp and ssh-keyscan
+        scp -i ~/.ssh/${{ secrets.EC2_SSH_KEY }} -r frontend/build ${{ secrets.REMOTE_USER }}@${{ secrets.HOST_DNS }}:${{ secrets.TARGET_DIR }}/frontend
+        ssh-keyscan -i ~/.ssh/${{ secrets.EC2_SSH_KEY }} -H ${{ secrets.HOST_DNS }} >> ~/.ssh/known_hosts
+
         # Restart Gunicorn (Flask)
         sudo systemctl restart gunicorn
-    
+
         # Restart Frontend Service
         sudo systemctl restart frontend
-    
+
         # Restart Backend Service
         sudo systemctl restart backend
-    
+
         # Restart Nginx
         sudo systemctl restart nginx
