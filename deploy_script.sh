@@ -1,16 +1,24 @@
 #!/bin/bash
+
+# Run subsequent commands with elevated privileges
 sudo su
+
+# Update the system
 sudo yum update
 
-cd travos-trust-app/
+# Change to the project directory
+cd /home/ec2-user/travos-trust-app/
+
+# Pull the latest changes from the GitHub repository
 git pull https://github.com/amihsan/travos-trust-app.git
+
 # Update the React app
-sudo cd /home/ec2-user/travos-trust-app/frontend
+cd frontend
 npm install
 npm run build
 
 # Update the Flask API
-sudo cd /home/ec2-user/travos-trust-app/backend
+cd ../backend
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
