@@ -1,4 +1,4 @@
-name: CI/CD Pipeline
+name: Deploy to EC2
 
 on:
   push:
@@ -6,55 +6,28 @@ on:
       - main
 
 jobs:
-  build:
+  deploy:
+    name: Deploy to EC2 on main branch push
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v2
+      - name: Checkout the files
+        uses: actions/checkout@v2
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: 14
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
 
-    - name: Install Dependencies and Build React App
-      run: |
-        cd frontend
-        npm install
-        npm run build
+      - name: Deploy to Server
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+          REMOTE_HOST: ${{ secrets.HOST_DNS }}
+          REMOTE_USER: ${{ secrets.USERNAME }}
+          TARGET: ${{ secrets.TARGET_DIR }}
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.8
-
-    - name: Install Python Dependencies and Test Flask App
-      run: |
-        cd backend
-        pip install -r requirements.txt
-        pytest
-
-    - name: Deploy
-      run: |
-        # Assuming your EC2 instance is accessible via SSH
-        ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ec2-user@your-ec2-instance-ip << 'EOF'
-          # Update the React app
-          cd /path/to/your/react/app
-          git pull origin main
-          npm install
-          npm run build
-    
-          # Update the Flask API
-          cd /path/to/your/flask/app
-          git pull origin main
-          pip install -r requirements.txt
-    
-          # Restart Gunicorn (assuming Gunicorn is used to serve Flask)
-          sudo systemctl restart gunicorn
-    
-          # Restart Nginx
-          sudo systemctl restart nginx
-        EOF
-    
-
+      - name: Deploy
+        run: |
+          ssh -i ${{ secrets.EC2_SSH_KEY }} ec2-user@${{ secrets.HOST_DNS }} 'bash -s' < deploy_script.sh
