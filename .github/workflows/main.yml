@@ -42,26 +42,26 @@ jobs:
         # Create .ssh directory and an empty known_hosts file
         mkdir -p ~/.ssh
         touch ~/.ssh/known_hosts
-
+    
         # Display the contents of the .ssh directory for debugging
         ls -la ~/.ssh
-
+    
         # Display the contents of the known_hosts file for debugging
         cat ~/.ssh/known_hosts
-
+    
         # Add the host key to the known_hosts file
         ssh-keyscan -H ${{ secrets.HOST_DNS }} >> ~/.ssh/known_hosts
-
-        # Debugging output: Print private key content
-        echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/debug_key
-        cat ~/.ssh/debug_key
-
-        # Specify the private key and use it for scp and ssh-keyscan
-        scp -i ~/.ssh/react_flask.pem -r frontend/build ${{ secrets.REMOTE_USER }}@${{ secrets.HOST_DNS }}:${{ secrets.TARGET_DIR }}/frontend
-
+    
+        # Write the private key content directly to the file
+        echo -e "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/react_flask.pem
+        chmod 600 ~/.ssh/react_flask.pem
+    
         # Debugging output: Print known_hosts file after updating
         cat ~/.ssh/known_hosts
-
+    
+        # Debugging output: Print private key file content
+        cat ~/.ssh/react_flask.pem
+    
         # Debugging output: Attempt an SSH connection
         ssh -i ~/.ssh/react_flask.pem -v ${{ secrets.REMOTE_USER }}@${{ secrets.HOST_DNS }} echo "SSH Connected"
 
