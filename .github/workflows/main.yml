@@ -41,6 +41,8 @@ jobs:
       run: |
         mkdir -p ~/.ssh
         touch ~/.ssh/known_hosts
+        ls -la ~/.ssh  # Display the contents of the .ssh directory for debugging
+        cat ~/.ssh/known_hosts  # Display the contents of the known_hosts file for debugging
         ssh-keyscan -H ${{ secrets.HOST_DNS }} >> ~/.ssh/known_hosts
         scp -r frontend/build ${{ secrets.REMOTE_USER }}@${{ secrets.HOST_DNS }}:${{ secrets.TARGET_DIR }}/frontend
         scp -r backend ${{ secrets.REMOTE_USER }}@${{ secrets.HOST_DNS }}:${{ secrets.TARGET_DIR }}/backend
