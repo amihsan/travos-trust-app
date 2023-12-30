@@ -25,8 +25,9 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
           REMOTE_HOST: ${{ secrets.HOST_DNS }}
+          REMOTE_USER: ${{ secrets.USERNAME }}
           TARGET: ${{ secrets.TARGET_DIR }}
 
       - name: Deploy
         run: |
-          ssh -i ${{ secrets.EC2_SSH_KEY }} ec2-user@${{ secrets.HOST_DNS }} 'bash -s' < deploy_script.sh
+          ssh -i ${{ secrets.EC2_SSH_KEY }} ${{ secrets.REMOTE_USER }}@${{ secrets.HOST_DNS }} 'bash -s' < deploy_script.sh
