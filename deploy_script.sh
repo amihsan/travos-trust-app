@@ -46,6 +46,3 @@ sudo systemctl restart nginx
 
 # Restart MongoDB Service
 sudo systemctl restart mongod
-
-# Restart Gunicorn (Flask)
-sudo systemctl restart gunicorn
