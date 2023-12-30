@@ -44,14 +44,14 @@ This is the Backend of the TRAVOS . So all the application logic is here.
 
 2. Run backend: after activate venv:
 
-For storing scenario details in MongoDB go to generate_scenario
+   For storing scenario details in MongoDB go to generate_scenario
 
-```bash
-python insert_scenario_data.py
-```
+   ```bash
+   python insert_scenario_data.py
+   ```
 
-and then in backend root:
+   and then in backend root:
 
-```bash
-python app.py
-```
+   ```bash
+   python app.py
+   ```
