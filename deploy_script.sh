@@ -16,16 +16,16 @@ source venv/bin/activate
 pip install -r requirements.txt
 
 # Restart Gunicorn (Flask)
-systemctl restart gunicorn
+sudo systemctl restart gunicorn
 
 # Restart Frontend Service
-systemctl restart frontend
+sudo systemctl restart frontend
 
 # Restart Backend Service
-systemctl restart backend
+sudo systemctl restart backend
 
 # Restart Nginx
-systemctl restart nginx
+sudo systemctl restart nginx
 
 # Restart MongoDB Service
-systemctl restart mongod
+sudo systemctl restart mongod
