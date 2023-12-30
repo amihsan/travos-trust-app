@@ -53,5 +53,5 @@ python insert_scenario_data.py
 and then in backend root:
 
 ```bash
-python run.py
+python app.py
 ```

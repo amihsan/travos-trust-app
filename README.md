@@ -75,5 +75,5 @@ http://ec2-51-21-101-168.eu-north-1.compute.amazonaws.com
    and then in backend root:
 
    ```bash
-   python run.py
+   python app.py
    ```
