@@ -36,21 +36,23 @@ jobs:
       run: |
         cd backend
         pip install -r requirements.txt
-
+    
     - name: Deploy to EC2
       run: |
+        mkdir -p ~/.ssh
+        touch ~/.ssh/known_hosts
         ssh-keyscan -H ${{ secrets.HOST_DNS }} >> ~/.ssh/known_hosts
         scp -r frontend/build ${{ secrets.REMOTE_USER }}@${{ secrets.HOST_DNS }}:${{ secrets.TARGET_DIR }}/frontend
         scp -r backend ${{ secrets.REMOTE_USER }}@${{ secrets.HOST_DNS }}:${{ secrets.TARGET_DIR }}/backend
-
+    
         # Restart Gunicorn (Flask)
         sudo systemctl restart gunicorn
-
+    
         # Restart Frontend Service
         sudo systemctl restart frontend
-
+    
         # Restart Backend Service
         sudo systemctl restart backend
-
+    
         # Restart Nginx
         sudo systemctl restart nginx
