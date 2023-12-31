@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Run subsequent commands with elevated privileges
-sudo su
+# # Run subsequent commands with elevated privileges
+# sudo su
 
 # Update the system
 sudo yum update
@@ -10,7 +10,7 @@ sudo yum update
 cd /home/ec2-user/travos-trust-app/
 
 # Pull the latest changes from the GitHub repository
-git pull https://github.com/amihsan/travos-trust-app.git
+git pull origin main
 
 # Check the exit status of git pull
 if [ $? -eq 0 ]; then
