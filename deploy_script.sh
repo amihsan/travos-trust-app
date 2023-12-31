@@ -21,9 +21,6 @@ else
     exit 1
 fi
 
-# Change ownership of the project directory to the user
-sudo chown -R ec2-user:ec2-user /home/ec2-user/travos-trust-app/
-
 # Update the React app
 cd frontend
 npm install
