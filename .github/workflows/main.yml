@@ -27,4 +27,4 @@ jobs:
       - name: Upload and Execute Deploy Script on EC2
         run: |
           scp -i ~/.ssh/private-key.pem $GITHUB_WORKSPACE/deploy_script.sh ec2-user@${{ secrets.HOST_DNS }}:/home/ec2-user/travos/travos-trust-app/
-          ssh -i ~/.ssh/private-key.pem ec2-user@${{ secrets.HOST_DNS }} 'sudo bash /home/ec2-user/travos/travos-trust-app/deploy_script.sh'
+          ssh -i ~/.ssh/private-key.pem ec2-user@${{ secrets.HOST_DNS }} 'sudo bash /home/ec2-user/travos/deploy_script.sh'
