@@ -10,7 +10,7 @@ sudo yum update
 cd /home/ec2-user/travos-trust-app/
 
 # Pull the latest changes from the GitHub repository
-sudo git pull https://github.com/amihsan/travos-trust-app.git
+git pull https://github.com/amihsan/travos-trust-app.git
 
 # Check the exit status of git pull
 if [ $? -eq 0 ]; then
