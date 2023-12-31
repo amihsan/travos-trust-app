@@ -20,6 +20,11 @@ jobs:
           chmod 600 ~/.ssh/private-key.pem
           ssh-keyscan -H ${{ secrets.HOST_DNS }} >> ~/.ssh/known_hosts
 
-      - name: Deploy to EC2
+      #       - name: Deploy to EC2
+      #         run: |
+      #           ssh -i ~/.ssh/private-key.pem ec2-user@${{ secrets.HOST_DNS }} 'sudo bash travos-trust-app\deploy_script.sh'
+
+      - name: Upload and Execute Deploy Script on EC2
         run: |
-          ssh -i ~/.ssh/private-key.pem ec2-user@${{ secrets.HOST_DNS }} 'sudo bash travos-trust-app\deploy_script.sh'
+          scp -i ~/.ssh/private-key.pem $GITHUB_WORKSPACE/deploy_script.sh ec2-user@${{ secrets.HOST_DNS }}:/home/ec2-user/travos/travos-trust-app/
+          ssh -i ~/.ssh/private-key.pem ec2-user@${{ secrets.HOST_DNS }} 'sudo bash /home/ec2-user/travos/travos-trust-app/deploy_script.sh'
