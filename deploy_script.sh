@@ -23,9 +23,8 @@ fi
 
 # Update the React app
 cd frontend
-npm update -g
 npm install
-sudo npm run build
+npm run build
 
 # Update the Flask API
 cd ../backend
