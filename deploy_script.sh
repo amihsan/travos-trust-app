@@ -1,11 +1,8 @@
 #!/bin/bash
 cd /home/ec2-user/
 
-sudo su
-
 # Update the system
 sudo yum update
-npm update
 
 # Change to the project directory
 cd /home/ec2-user/travos/travos-trust-app/
@@ -26,6 +23,7 @@ fi
 
 # Update the React app
 cd frontend
+npm update -g
 npm install
 npm run build
 
