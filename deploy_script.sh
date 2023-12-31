@@ -8,6 +8,7 @@ sudo yum update
 cd /home/ec2-user/travos/travos-trust-app/
 
 # Pull the latest changes from the GitHub repository
+git status
 git stash
 git fetch origin main
 git merge origin/main
