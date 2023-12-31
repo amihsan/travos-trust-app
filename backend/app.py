@@ -22,7 +22,7 @@ db = client[database_name]
 # Default Route: Hello From Ihsan
 @app.route('/')
 def hello_from_ihsan():
-    return 'Hello From Ihsan'
+    return 'Hello From Backend'
 
 # Route 1: Get Scenario Details
 @app.route('/api/getScenarioDetails/<int:scenario_number>')
