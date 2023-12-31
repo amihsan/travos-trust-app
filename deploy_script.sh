@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Run subsequent commands with elevated privileges
-# sudo su
-
 # Update the system
 sudo yum update
 
