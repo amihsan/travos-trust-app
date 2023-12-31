@@ -10,7 +10,7 @@ sudo yum update
 cd /home/ec2-user/travos-trust-app/
 
 # Add an exception for the directory to resolve the "dubious ownership" issue
-git config --global --add safe.directory .
+git config --global --add safe.directory /home/ec2-user/travos-trust-app
 
 # Pull the latest changes from the GitHub repository
 git pull origin main
