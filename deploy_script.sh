@@ -7,7 +7,7 @@
 sudo yum update
 
 # Change to the project directory
-cd /home/ec2-user/travos-trust-app/
+cd /home/ec2-user/
 
 # Pull the latest changes from the GitHub repository
 git pull origin main
