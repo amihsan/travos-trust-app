@@ -110,7 +110,7 @@ const Body = () => {
               className={`${styles.tooltipLink} ${styles.tooltipLinkTeal}`}
               onClick={handleFullDetailsClick}
             >
-              (<strong>see More details</strong>)
+              (<strong>see more details</strong>)
             </span>
           </p>
         </div>
