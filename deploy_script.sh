@@ -28,11 +28,9 @@ npm run build
 
 # Update the Flask API
 cd ../backend
+python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
-
-# Deactivate the virtual environment
-deactivate
 
 # Restart Frontend Service
 sudo systemctl restart frontend
