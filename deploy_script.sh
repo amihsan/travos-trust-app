@@ -1,13 +1,16 @@
 #!/bin/bash
 
 # Run subsequent commands with elevated privileges
-sudo su
+# sudo su
 
 # Update the system
 sudo yum update
 
 # Change to the project directory
 cd /home/ec2-user/travos-trust-app/
+
+# Reset ownership of the repository to ec2-user
+sudo chown -R ec2-user:ec2-user .
 
 # Add an exception for the directory to resolve the "dubious ownership" issue
 git config --local --add safe.directory .
