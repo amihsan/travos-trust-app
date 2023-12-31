@@ -9,13 +9,15 @@ sudo yum update
 cd /home/ec2-user/travos/travos-trust-app/
 
 # Pull the latest changes from the GitHub repository
-git pull origin main
+git stash
+git fetch origin main
+git merge origin/main
 
 # Check the exit status of git pull
 if [ $? -eq 0 ]; then
-    echo "Git pull successful."
+    echo "Git merge successful."
 else
-    echo "Git pull failed."
+    echo "Git merge failed."
     # You might want to exit the script or handle the failure accordingly
     exit 1
 fi
