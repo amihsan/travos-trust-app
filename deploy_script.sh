@@ -1,5 +1,7 @@
 #!/bin/bash
 
+sudo su
+
 # Update the system
 sudo yum update
 
@@ -20,6 +22,7 @@ fi
 
 # Update the React app
 cd frontend
+npm update -g
 npm install
 npm run build
 
