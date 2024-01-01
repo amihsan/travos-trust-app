@@ -19,10 +19,6 @@ jobs:
           echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/private-key.pem
           chmod 400 ~/.ssh/private-key.pem
           ssh-keyscan -H ${{ secrets.HOST_DNS }} >> ~/.ssh/known_hosts
-
-      - name: Set execute permission for deploy script
-        run: chmod +x $GITHUB_WORKSPACE/deploy_script.sh
-
       - name: Upload and Execute Deploy Script on EC2
         run: |
           scp -o ConnectTimeout=60 -i ~/.ssh/private-key.pem $GITHUB_WORKSPACE/deploy_script.sh ec2-user@${{ secrets.HOST_DNS }}:/home/ec2-user/travos/travos-trust-app/
