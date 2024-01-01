@@ -10,14 +10,13 @@ cd /home/ec2-user/travos/travos-trust-app/
 # Pull the latest changes from the GitHub repository
 git status
 git stash
-git fetch origin main
-git merge origin/main
+git pull origin main
 
 # Check the exit status of git pull
 if [ $? -eq 0 ]; then
-    echo "Git merge successful."
+    echo "Git pull successful."
 else
-    echo "Git merge failed."
+    echo "Git pull failed."
     # You might want to exit the script or handle the failure accordingly
     exit 1
 fi

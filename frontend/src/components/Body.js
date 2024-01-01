@@ -15,9 +15,20 @@ const Body = () => {
   const [showEvaluationResults, setShowEvaluationResults] = useState(false);
   const [evaluationResults, setEvaluationResults] = useState(null);
   const [scenarioDetails, setScenarioDetails] = useState(null);
+  const [scenarios, setScenarios] = useState([]);
 
-  // const baseUrl = "http://localhost:5000"; // For development
-  const baseUrl = "http://51.21.101.168:5000"; //For deployment
+  const baseUrl = process.env.REACT_APP_API_URL;
+
+  useEffect(() => {
+    axios
+      .get(`${baseUrl}/api/getAllScenarios`)
+      .then((response) => {
+        setScenarios(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching scenarios:", error);
+      });
+  }, [baseUrl]);
 
   useEffect(() => {
     // Fetch scenario data when selectedScenario changes
@@ -32,7 +43,7 @@ const Body = () => {
           console.error("Error fetching scenario details:", error);
         });
     }
-  }, [selectedScenario]);
+  }, [selectedScenario, baseUrl]);
 
   const handleScenarioChange = (eventKey) => {
     console.log("Selected Scenario:", eventKey);
@@ -133,18 +144,15 @@ const Body = () => {
               backgroundColor: "#E8E8E8",
             }}
           >
-            <Dropdown.Item eventKey="1" className={styles.dropdownItem}>
-              Scenario 1
-            </Dropdown.Item>
-            <Dropdown.Item eventKey="2" className={styles.dropdownItem}>
-              Scenario 2
-            </Dropdown.Item>
-            <Dropdown.Item eventKey="3" className={styles.dropdownItem}>
-              Scenario 3
-            </Dropdown.Item>
-            <Dropdown.Item eventKey="4" className={styles.dropdownItem}>
-              Scenario 4
-            </Dropdown.Item>
+            {scenarios.map((scenario, index) => (
+              <Dropdown.Item
+                key={index + 1}
+                eventKey={index + 1}
+                className={styles.dropdownItem}
+              >
+                {`Scenario ${index + 1}`}
+              </Dropdown.Item>
+            ))}
           </Dropdown.Menu>
         </Dropdown>
       </div>
@@ -157,13 +165,6 @@ const Body = () => {
         >
           Start Evaluation
         </Button>
-        {/* <Button
-          variant="primary"
-          className={styles.reviewButton}
-          onClick={handleDeleteItem}
-        >
-          Review Results
-        </Button> */}
       </div>
 
       {showDetails && (

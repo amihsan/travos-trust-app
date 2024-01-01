@@ -1,4 +1,5 @@
 import React from "react";
+import { Button } from "react-bootstrap";
 import styles from "./DropdownModal.module.css";
 
 const formatObservation = (observations) => {
@@ -63,6 +64,15 @@ const DropdownModal = ({
             {formatHistory(details.history)}
           </div>
         </div>
+        {/* <div className={styles.buttonDiv}>
+          <Button
+            variant="primary"
+            // onClick={handleStartEvaluation}
+            className={styles.startButton}
+          >
+            Start Evaluation
+          </Button> 
+          </div>*/}
         <div className={styles.buttonContainer}>
           <button className={styles.closeButton} onClick={onClose}>
             Close

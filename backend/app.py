@@ -2,8 +2,8 @@ from flask import Flask, jsonify, request
 from pymongo import MongoClient
 from flask_cors import CORS
 from evaluation.evaluation_logic import perform_evaluation
-from dotenv import load_dotenv
 import os
+from dotenv import load_dotenv
 
 # Load environment variables from .env file
 load_dotenv()
@@ -12,8 +12,8 @@ app = Flask(__name__)
 CORS(app)
 
 # Retrieve MongoDB connection details from environment variables
-mongodb_uri = os.environ.get('MONGODB_URI', 'mongodb://localhost:27017/')
-database_name = os.environ.get('DATABASE_NAME', 'development_database')
+mongodb_uri = os.getenv('MONGODB_URI')
+database_name = os.getenv('DATABASE_NAME')
 
 # Connect to MongoDB
 client = MongoClient(mongodb_uri)
@@ -22,9 +22,24 @@ db = client[database_name]
 # Default Route: Hello From Ihsan
 @app.route('/')
 def hello_from_ihsan():
-    return 'Hello From Backend'
-
-# Route 1: Get Scenario Details
+    
+    try:
+      return 'Hello From Backend'
+    
+    except Exception as e:
+        return handle_error('get_scenario_details', f'An error occurred: {str(e)}')
+    
+# Route 1: Get All Scenarios List
+@app.route('/api/getAllScenarios')
+def get_all_scenarios():
+    try:
+        collections = db.list_collection_names()
+        return collections
+    
+    except Exception as e:
+        return handle_error('get_all_scenarios', f'An error occurred: {str(e)}')
+    
+# Route 2: Get Scenario Details
 @app.route('/api/getScenarioDetails/<int:scenario_number>')
 def get_scenario_details(scenario_number):
     try:
@@ -42,7 +57,7 @@ def get_scenario_details(scenario_number):
     except Exception as e:
         return handle_error('get_scenario_details', f'An error occurred: {str(e)}')
 
-# Route 2: Start Evaluation
+# Route 3: Start Evaluation
 @app.route('/api/startEvaluation', methods=['POST'])
 def start_evaluation():
     try:

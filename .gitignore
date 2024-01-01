@@ -3,6 +3,7 @@
 /backend/logs/
 /backend/.env.prod
 /backend/.env
+/frontend/.env
 /backend/app.log
 /backend/venv
 /frontend/node_modules
