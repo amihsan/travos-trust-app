@@ -61,3 +61,9 @@
   margin-bottom: 8px;
   font-family: "Arial", sans-serif;
 }
+
+.buttonDiv {
+  /* margin-top: 5px !important; */
+  display: flex;
+  justify-content: space-around;
+}

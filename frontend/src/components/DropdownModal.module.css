@@ -87,7 +87,7 @@
 }
 
 .buttonDiv {
-  margin-top: 5px !important;
+  /* margin-top: 5px !important; */
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
 }

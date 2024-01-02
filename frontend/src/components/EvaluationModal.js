@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { Button } from "react-bootstrap";
 import styles from "./EvaluationModal.module.css";
+import DropdownModal from "./DropdownModal";
 
 const EvaluationModal = ({
   isOpen,
@@ -7,8 +9,15 @@ const EvaluationModal = ({
   scenario,
   details,
   onStartEvaluation,
+  seeDetails,
 }) => {
-  if (!isOpen) return null;
+  const [showDetailsModal, setShowDetailsModal] = useState(false);
+
+  const handleSeeDetailsClick = () => {
+    setShowDetailsModal(true);
+  };
+
+  // const observationDetails = details?.results || [];
 
   const observationDetails = details.results;
 
@@ -45,12 +54,29 @@ const EvaluationModal = ({
             })}
           </div>
         </div>
-        <div className={styles.buttonContainer}>
-          <button className={styles.closeButton} onClick={onClose}>
+        <div className={styles.buttonDiv}>
+          <Button variant="primary" onClick={onStartEvaluation}>
+            Start Again
+          </Button>
+          <Button variant="primary" onClick={handleSeeDetailsClick}>
+            Scenario Details
+          </Button>
+          <Button variant="primary" onClick={onClose}>
             Close
-          </button>
+          </Button>
         </div>
       </div>
+      {showDetailsModal && (
+        <DropdownModal
+          isOpen={showDetailsModal}
+          onClose={onClose}
+          scenario={scenario}
+          details={seeDetails}
+          onStartEvaluation={onStartEvaluation}
+          showThreeButtons={true}
+          results={details}
+        />
+      )}
     </div>
   );
 };

@@ -77,11 +77,9 @@ const Body = () => {
           scenario: selectedScenario,
         })
         .then((response) => {
-          // Handle the response, if needed
           console.log("Evaluation started:", response.data);
           setEvaluationResults(response.data);
           setShowEvaluationResults(true);
-          // You can also update the state or perform other actions based on the response
         })
         .catch((error) => {
           console.error("Error starting evaluation:", error);
@@ -98,7 +96,6 @@ const Body = () => {
   };
 
   const handleFullDetailsClick = (e) => {
-    // Get the position of the click event
     setShowFullDetailsModal(true);
   };
 
@@ -157,22 +154,24 @@ const Body = () => {
         </Dropdown>
       </div>
 
-      <div className={styles.buttonDiv}>
-        <Button
-          variant="primary"
-          onClick={handleStartEvaluation}
-          className={styles.startButton}
-        >
-          Start Evaluation
-        </Button>
-      </div>
-
       {showDetails && (
         <DropdownModal
           isOpen={showDetails}
           onClose={handleCloseModal}
           scenario={selectedScenario}
           details={scenarioDetails}
+          onStartEvaluation={handleStartEvaluation}
+          results={evaluationResults}
+        />
+      )}
+      {showEvaluationResults && (
+        <EvaluationModal
+          isOpen={showEvaluationResults}
+          onClose={handleCloseModal}
+          scenario={selectedScenario}
+          details={evaluationResults}
+          onStartEvaluation={handleStartEvaluation}
+          seeDetails={scenarioDetails}
         />
       )}
 
@@ -182,14 +181,6 @@ const Body = () => {
           onClose={handleCloseModal}
           scenario="Full Details"
           details="Add your full details content here."
-        />
-      )}
-      {showEvaluationResults && (
-        <EvaluationModal
-          isOpen={showEvaluationResults}
-          onClose={handleCloseModal}
-          scenario={selectedScenario}
-          details={evaluationResults}
         />
       )}
 

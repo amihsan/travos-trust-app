@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import styles from "./DropdownModal.module.css";
+import EvaluationModal from "./EvaluationModal";
 
 const formatObservation = (observations) => {
   return (
@@ -45,15 +46,22 @@ const DropdownModal = ({
   scenario,
   details,
   onStartEvaluation,
+  showThreeButtons = false,
+  results,
 }) => {
-  if (!isOpen) return null;
+  const [showEvaluationModal, setShowEvaluationModal] = useState(false);
+
+  const handleResultsClick = () => {
+    setShowEvaluationModal(true);
+    onStartEvaluation();
+  };
 
   return (
     <div className={styles.overlay} onClick={onClose}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-        <h3
+        <h2
           className={styles.header}
-        >{`TRAVOS Demo Scenario ${scenario} Details`}</h3>
+        >{`TRAVOS Scenario ${scenario} Details`}</h2>
         <div className={styles.modalBody}>
           <div className={styles.detailsContainer}>
             <h4>Users:</h4>
@@ -64,21 +72,42 @@ const DropdownModal = ({
             {formatHistory(details.history)}
           </div>
         </div>
-        {/* <div className={styles.buttonDiv}>
-          <Button
-            variant="primary"
-            // onClick={handleStartEvaluation}
-            className={styles.startButton}
-          >
-            Start Evaluation
-          </Button> 
-          </div>*/}
-        <div className={styles.buttonContainer}>
-          <button className={styles.closeButton} onClick={onClose}>
-            Close
-          </button>
+
+        <div className={styles.buttonDiv}>
+          {showThreeButtons ? (
+            // If showThreeButtons is true, render three buttons
+            <>
+              <Button variant="primary" onClick={handleResultsClick}>
+                See Results
+              </Button>
+              <Button variant="primary">Scenario Details</Button>
+              <Button variant="primary" onClick={onClose}>
+                Close
+              </Button>
+            </>
+          ) : (
+            // If showThreeButtons is false, render two buttons
+            <>
+              <Button variant="primary" onClick={onStartEvaluation}>
+                Start Evaluation
+              </Button>
+              <Button variant="primary" onClick={onClose}>
+                Close
+              </Button>
+            </>
+          )}
         </div>
       </div>
+      {showEvaluationModal && (
+        <EvaluationModal
+          isOpen={showEvaluationModal}
+          onClose={onClose}
+          scenario={scenario}
+          onStartEvaluation={onStartEvaluation}
+          seeDetails={details}
+          details={results}
+        />
+      )}
     </div>
   );
 };
