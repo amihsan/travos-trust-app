@@ -53,7 +53,7 @@ const EvaluationModal = ({
           </div>
           <div className={styles.buttonDiv}>
             <Button variant="primary" onClick={onStartEvaluation}>
-              Start Again
+              See Results
             </Button>
             <Button variant="primary" onClick={showDropdownModalThreeButtons}>
               Scenario Details
