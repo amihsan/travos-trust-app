@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { Button } from "react-bootstrap";
 import styles from "./DropdownModal.module.css";
-import EvaluationModal from "./EvaluationModal";
 
 const formatObservation = (observations) => {
   return (
@@ -46,16 +45,9 @@ const DropdownModal = ({
   scenario,
   details,
   onStartEvaluation,
+  showDropdownModalThreeButtons,
   showThreeButtons = false,
-  results,
 }) => {
-  const [showEvaluationModal, setShowEvaluationModal] = useState(false);
-
-  const handleResultsClick = () => {
-    setShowEvaluationModal(true);
-    onStartEvaluation();
-  };
-
   return (
     <div className={styles.overlay} onClick={onClose}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
@@ -77,10 +69,12 @@ const DropdownModal = ({
           {showThreeButtons ? (
             // If showThreeButtons is true, render three buttons
             <>
-              <Button variant="primary" onClick={handleResultsClick}>
+              <Button variant="primary" onClick={onStartEvaluation}>
                 See Results
               </Button>
-              <Button variant="primary">Scenario Details</Button>
+              <Button variant="primary" onClick={showDropdownModalThreeButtons}>
+                Scenario Details
+              </Button>
               <Button variant="primary" onClick={onClose}>
                 Close
               </Button>
@@ -98,16 +92,6 @@ const DropdownModal = ({
           )}
         </div>
       </div>
-      {showEvaluationModal && (
-        <EvaluationModal
-          isOpen={showEvaluationModal}
-          onClose={onClose}
-          scenario={scenario}
-          onStartEvaluation={onStartEvaluation}
-          seeDetails={details}
-          details={results}
-        />
-      )}
     </div>
   );
 };

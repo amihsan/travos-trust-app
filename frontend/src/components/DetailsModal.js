@@ -14,7 +14,7 @@ const DetailsModal = ({
   return (
     <div className={styles.overlay} onClick={onClose}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-        <h2 className={styles.header}>{`TRAVOS Trust Model Details`}</h2>
+        <h2 className={styles.header}>Working Principles of Travos Model</h2>
         <div className={styles.modalBody}>
           <div className={styles.detailsContainer}>
             <p>

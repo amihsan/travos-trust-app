@@ -16,6 +16,7 @@ const Body = () => {
   const [evaluationResults, setEvaluationResults] = useState(null);
   const [scenarioDetails, setScenarioDetails] = useState(null);
   const [scenarios, setScenarios] = useState([]);
+  const [showThreeButtons, setShowThreeButtons] = useState(false);
 
   const baseUrl = process.env.REACT_APP_API_URL;
 
@@ -57,6 +58,7 @@ const Body = () => {
         .get(`${baseUrl}/api/getScenarioDetails/${eventKey}`)
         .then((response) => {
           setScenarioDetails(response.data);
+          // setShowEvaluationResults(false);
           setShowDetails(true);
         })
         .catch((error) => {
@@ -79,6 +81,7 @@ const Body = () => {
         .then((response) => {
           console.log("Evaluation started:", response.data);
           setEvaluationResults(response.data);
+          setShowDetails(false);
           setShowEvaluationResults(true);
         })
         .catch((error) => {
@@ -93,10 +96,18 @@ const Body = () => {
     setShowDetails(false);
     setShowFullDetailsModal(false);
     setShowEvaluationResults(false);
+
+    setShowThreeButtons(false);
   };
 
   const handleFullDetailsClick = (e) => {
     setShowFullDetailsModal(true);
+  };
+
+  const handleShowDropdownModal = (showThreeButtons) => {
+    setShowEvaluationResults(false);
+    setShowDetails(true);
+    setShowThreeButtons(showThreeButtons);
   };
 
   return (
@@ -161,7 +172,8 @@ const Body = () => {
           scenario={selectedScenario}
           details={scenarioDetails}
           onStartEvaluation={handleStartEvaluation}
-          results={evaluationResults}
+          showThreeButtons={showThreeButtons}
+          showDropdownModalThreeButtons={handleShowDropdownModal}
         />
       )}
       {showEvaluationResults && (
@@ -171,7 +183,8 @@ const Body = () => {
           scenario={selectedScenario}
           details={evaluationResults}
           onStartEvaluation={handleStartEvaluation}
-          seeDetails={scenarioDetails}
+          scenarioDetails={scenarioDetails}
+          showDropdownModalThreeButtons={handleShowDropdownModal}
         />
       )}
 
@@ -183,7 +196,6 @@ const Body = () => {
           details="Add your full details content here."
         />
       )}
-
       {/* React-tooltip configuration */}
       <Tooltip
         id="fullDetailsTooltip"
