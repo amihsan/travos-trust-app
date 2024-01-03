@@ -30,8 +30,9 @@ const DetailsModal = ({
               ). A Flowchart is provided below to give a simplify overview of
               Trust Evaluation Process in TRAVOS.
             </p>
-
-            <img src={travos} alt="Travos Concept" />
+            <div className={styles.image}>
+              <img src={travos} alt="Travos Concept" />
+            </div>
 
             <p>
               The flowchart demonstrates that evaluation starts after a message
