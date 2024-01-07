@@ -180,10 +180,10 @@ scenario5_data = {
       {"sender": "C", "recipient": "D", "message": "Semantic Web and Linked Open Data"},
       {"sender": "D", "recipient": "C", "message": "Redecentralization of the Web"},
       {"sender": "A", "recipient": "C", "message": "Web-based learning"},
-      {"sender": "D", "recipient": "G", "message": "New Observation"},
-      {"sender": "G", "recipient": "A", "message": "Another Observation"},
-      {"sender": "A", "recipient": "D", "message": "Observation 3"},
-      {"sender": "B", "recipient": "F", "message": "Observation 4"}
+      {"sender": "D", "recipient": "G", "message": "Web of Things"},
+      {"sender": "G", "recipient": "A", "message": "Web Assembly"},
+      {"sender": "A", "recipient": "D", "message": "Semantic Web"},
+      {"sender": "B", "recipient": "F", "message": "Linked Open Data"}
     ],
     "history": {
       "A": {
