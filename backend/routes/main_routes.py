@@ -13,9 +13,12 @@ load_dotenv()
 mongodb_uri = os.getenv('MONGODB_URI')
 database_name = os.getenv('DATABASE_NAME')
 
+
 # Connect to MongoDB
 client = MongoClient(mongodb_uri)
 db = client[database_name]
+
+
 
 # Default Route: Hello From Ihsan
 @bp.route('/')
