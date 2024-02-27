@@ -1,5 +1,6 @@
 .vscode/
 .idea/
+/.env
 /backend/logs/
 /backend/.env.prod
 /backend/.env
