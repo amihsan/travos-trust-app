@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  build-and-push-client:
+  build-and-push-frontend:
     runs-on: ubuntu-latest
 
     steps:
@@ -19,13 +19,13 @@ jobs:
       - name: Login to Docker Hub
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
-      - name: Build and push Client Docker image
+      - name: Build and push Frontend Docker image
         run: |
-          cd client
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPONAME }}-client:latest .
-          docker push ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPONAME }}-client:latest
+          cd frontend
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPONAME }}-frontend:latest .
+          docker push ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPONAME }}-frontend:latest
 
-  build-and-push-server:
+  build-and-push-backend:
     runs-on: ubuntu-latest
 
     steps:
@@ -38,8 +38,8 @@ jobs:
       - name: Login to Docker Hub
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
-      - name: Build and push Server Docker image
+      - name: Build and push Backend Docker image
         run: |
-          cd server
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPONAME }}-server:latest .
-          docker push ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPONAME }}-server:latest
+          cd backend
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPONAME }}-backend:latest .
+          docker push ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPONAME }}-backend:latest
