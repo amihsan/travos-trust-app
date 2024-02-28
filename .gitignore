@@ -1,4 +1,6 @@
 .vscode/
+/mongodb_data
+/mongo_dump
 .idea/
 /.env
 /backend/logs/
