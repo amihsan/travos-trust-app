@@ -1,4 +1,4 @@
-[![CI/CD for Quiz App](https://github.com/amihsan/travos-trust-app/actions/workflows/docker-build-deploy.yml/badge.svg)](https://github.com/amihsan/travos-trust-app/actions/workflows/docker-build-deploy.yml)
+[![CI/CD for Travos App](https://github.com/amihsan/travos-trust-app/actions/workflows/docker-build-deploy.yml/badge.svg)](https://github.com/amihsan/travos-trust-app/actions/workflows/docker-build-deploy.yml)
 [![Docker](https://img.shields.io/badge/Docker-Ready-blue?logo=docker)](https://www.docker.com/)
 
 ## 💡 About
