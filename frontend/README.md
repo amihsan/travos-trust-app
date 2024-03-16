@@ -12,15 +12,15 @@ This is the Frontend part of the TRAVOS . So no business logic is here.
 ### ⚙️ Local Setup
 
 1. Setup npm in frontend root:
-    ```shell
-    npm install
-    ```
-
+   ```shell
+   npm install
+   ```
+2. Create a .env in frontend root. Follow template.env
 
 ## 👟 Usage
 
 ### 🏠 Local Usage
-   
+
 1.  Run frontend:
     ```bash
     npm start
