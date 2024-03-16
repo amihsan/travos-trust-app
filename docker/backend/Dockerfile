@@ -7,7 +7,7 @@ COPY ./backend/requirements.txt /app/backend/
 
 COPY ./backend /app/backend
 
-RUN pip install --upgrade pip setuptools && \
+RUN pip install --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt
 
 EXPOSE 5000
