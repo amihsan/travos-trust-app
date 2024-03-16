@@ -1,3 +1,6 @@
+[![CI/CD for Quiz App](https://github.com/amihsan/travos-trust-app/actions/workflows/docker-build-deploy.yml/badge.svg)](https://github.com/amihsan/travos-trust-app/actions/workflows/docker-build-deploy.yml)
+[![Docker](https://img.shields.io/badge/Docker-Ready-blue?logo=docker)](https://www.docker.com/)
+
 ## 💡 About
 
 This is the main repository of the TRAVOS app which includes both the frontend and backend logic of the application.
