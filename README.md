@@ -82,14 +82,6 @@ http://ec2-3-78-213-52.eu-central-1.compute.amazonaws.com/
 
 For Docker MongoDB atlas is used. Nginx is used used to serve react build and proxy to backend flask api.
 
-##### For local development:
-
-Create a .env in project root directory. Follow template.env
-
-```bash
-docker-compose -f docker-compose-dev.yml up --build -d
-```
-
 ##### For Production:
 
 ```bash
