@@ -1,5 +1,5 @@
 # Use the official Python image as a base
-FROM python:3.7-alpine
+FROM python:3.9.12-alpine
 
 WORKDIR /app/backend
 
@@ -7,7 +7,7 @@ COPY ./backend/requirements.txt /app/backend/
 
 COPY ./backend /app/backend
 
-RUN pip install --upgrade pip setuptools && \ pip install --upgrade pip && \
+RUN pip install --upgrade pip setuptools && \
     pip install --no-cache-dir -r requirements.txt
 
 EXPOSE 5000
