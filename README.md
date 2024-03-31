@@ -7,7 +7,7 @@ This is the main repository of the TRAVOS app which includes both the frontend a
 
 ## View Demo (Deployed on AWS EC2)
 
-http://ec2-3-78-213-52.eu-central-1.compute.amazonaws.com/
+https://travos-react-app.onrender.com/
 
 ### 🧱 Built With
 
