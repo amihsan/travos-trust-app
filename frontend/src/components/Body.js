@@ -20,6 +20,7 @@ const Body = () => {
 
   const baseUrl = process.env.REACT_APP_API_URL;
   // const baseUrl = ''; // For kubernetes
+  // console.log(`${baseUrl}/api/getAllScenarios`)
 
   useEffect(() => {
     axios
