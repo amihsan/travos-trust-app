@@ -14,4 +14,9 @@
 
 /backend/**/__pycache__/
 
-
+/kubernetes/backend-config.yaml
+help.txt
+# /frontend/Dockerfile
+# /frontend/.dockerignore
+# /backend/Dockerfile
+# /backend/Dockerfile

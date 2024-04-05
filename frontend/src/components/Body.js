@@ -19,6 +19,7 @@ const Body = () => {
   const [showThreeButtons, setShowThreeButtons] = useState(false);
 
   const baseUrl = process.env.REACT_APP_API_URL;
+  // const baseUrl = ''; // For kubernetes
 
   useEffect(() => {
     axios
