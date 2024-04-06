@@ -18,17 +18,15 @@ database_name = os.getenv('DATABASE_NAME')
 client = MongoClient(mongodb_uri)
 db = client[database_name]
 
-
-
 # Default Route: Hello From Ihsan
 @bp.route('/')
-def hello_from_ihsan():
-    
+def hello_from_backend(): 
     try:
-      return 'Hello From Backend'
-    
+        return '<b><big>Hello From Backend</big></b>'
     except Exception as e:
-        return handle_error('get_scenario_details', f'An error occurred: {str(e)}')
+        error_message = f'An error occurred: {str(e)}'
+        return error_message
+
     
 # Route 1: Get All Scenarios List
 @bp.route('/api/getAllScenarios')
