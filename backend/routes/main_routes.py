@@ -20,7 +20,7 @@ db = client[database_name]
 
 # Default Route: Hello From Ihsan
 @bp.route('/')
-def hello_from_travos(): 
+def index(): 
     try:
         return '<b><big>Hello From Travos lab</big></b>'
     except Exception as e:
@@ -28,7 +28,7 @@ def hello_from_travos():
         return error_message
     
 @bp.route("/api")
-def hello__travos_again():
+def index_again():
     return render_template('index.html')
 
     
