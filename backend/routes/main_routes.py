@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, render_template
 from evaluation.evaluation_logic import perform_evaluation
 from pymongo import MongoClient
 import os
@@ -20,12 +20,16 @@ db = client[database_name]
 
 # Default Route: Hello From Ihsan
 @bp.route('/')
-def hello_from_backend(): 
+def hello_from_travos(): 
     try:
-        return '<b><big>Hello From Backend</big></b>'
+        return '<b><big>Hello From Travos lab</big></b>'
     except Exception as e:
         error_message = f'An error occurred: {str(e)}'
         return error_message
+    
+@bp.route("/api")
+def hello__travos_again():
+    return render_template('index.html')
 
     
 # Route 1: Get All Scenarios List
