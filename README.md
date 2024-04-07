@@ -5,7 +5,7 @@
 
 This is the main repository of the TRAVOS app which includes both the frontend and backend logic of the application.
 
-## View Demo (Deployed on AWS EC2)
+## View Demo
 
 https://travos-react-app.onrender.com/
 
