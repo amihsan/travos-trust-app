@@ -12,4 +12,6 @@ def test_template_rendering():
     response = client.get('/')
     assert b"Hello From Travos lab" in response.data
 
+
+
         
