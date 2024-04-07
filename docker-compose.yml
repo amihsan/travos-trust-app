@@ -3,11 +3,9 @@ version: "3"
 services:
   nginx:
     restart: unless-stopped
-    build:
-      context: .
-      dockerfile: ./docker/nginx/Dockerfile
+    image: amihsan/travos-frontend:latest 
     ports:
-      - 80:80
+      - 8080:8080
     env_file:
       - ./frontend/.env
     volumes:
@@ -17,10 +15,37 @@ services:
 
   backend:
     restart: unless-stopped
-    build:
-      context: .
-      dockerfile: ./docker/backend/Dockerfile
+    image: amihsan/travos-backend:latest 
     ports:
-      - 5000:5000
+      - 8000:8000
     env_file:
       - ./backend/.env
+
+# version: "3"
+
+# services:
+#   nginx:
+#     restart: unless-stopped
+#     build:
+#       context: .
+#       dockerfile: ./docker/nginx/Dockerfile
+#     ports:
+#       - 8080:8080
+#     env_file:
+#       - ./frontend/.env
+#     volumes:
+#       - ./docker/nginx/templates:/etc/nginx/templates
+#     depends_on:
+#       - backend
+
+#   backend:
+#     restart: unless-stopped
+#     build:
+#       context: .
+#       dockerfile: ./docker/backend/Dockerfile
+#     ports:
+#       - 8000:8000
+#     env_file:
+#       - ./backend/.env
+
+      
