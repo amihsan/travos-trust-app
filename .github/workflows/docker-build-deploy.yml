@@ -33,12 +33,7 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            mkdir -p ~/.ssh
-            echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/private-key.pem
-            chmod 400 ~/.ssh/private-key.pem
-            ssh-keyscan -H ${{ secrets.HOST_DNS }} >> ~/.ssh/known_hosts
-            # chmod 400 ${{ secrets.EC2_SSH_KEY }}
-            # ssh-keyscan -H ${{ secrets.EC2_HOST_DNS }} >> $HOME/.ssh/known_hosts
+
             set -e  # Exit immediately if a command exits with a non-zero status
 
             # Check if Git is installed
