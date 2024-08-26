@@ -6,8 +6,7 @@
 This is the main repository of the TRAVOS app which includes both the frontend and backend logic of the application.
 
 ## View Demo
-
-https://travos-react-app.onrender.com/
+https://react-travos-app.vercel.app/
 
 ### 🧱 Built With
 
